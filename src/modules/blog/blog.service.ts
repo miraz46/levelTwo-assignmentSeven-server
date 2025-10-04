@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import AppError from "../../errorHelpers/AppError";
 import { IBlog } from "./blog.interface";
 import { Blog } from "./blog.model";
@@ -5,8 +6,8 @@ import httpStatus from "http-status-codes"
 
 
 const createBlog = async (payload: Partial<IBlog>) => {
-    const user = await Blog.create(payload);
-    return user;
+    const blog = await Blog.create(payload);
+    return blog;
 }
 
 const updateBlog = async (blogId: string, payload: Partial<IBlog>) => {
@@ -16,29 +17,36 @@ const updateBlog = async (blogId: string, payload: Partial<IBlog>) => {
         throw new AppError(httpStatus.NOT_FOUND, "Blog Not Found")
     }
 
-    const newUpdatedUser = await Blog.findByIdAndUpdate(blogId, payload, { new: true, runValidators: true });
+    const newUpdatedBlog = await Blog.findByIdAndUpdate(blogId, payload, { new: true, runValidators: true });
 
-    return newUpdatedUser
+    return newUpdatedBlog
 
 }
 
 const getAllBlog = async () => {
-    const users = await Blog.find({});
+    const blogs = await Blog.find({});
 
-    const totalUsers = await Blog.countDocuments()
+    const totalBlogs = await Blog.countDocuments()
     return {
-        data: users,
+        data: blogs,
         meta: {
-            total: totalUsers
+            total: totalBlogs
         }
     }
 }
 
-const getSingleBlog = async (userId: string) => {
-    const users = await Blog.findById(userId);
+const getSingleBlog = async (blogId: string) => {
+    const blogs = await Blog.findById(blogId);
 
     return {
-        data: users
+        data: blogs
+    }
+}
+const deleteBlog = async (blogId: string) => {
+    const blogs = await Blog.findByIdAndDelete(blogId);
+
+    return {
+        data: null
     }
 }
 
@@ -46,5 +54,6 @@ export const BlogService = {
     createBlog,
     updateBlog,
     getAllBlog,
-    getSingleBlog
+    getSingleBlog,
+    deleteBlog
 }

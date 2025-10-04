@@ -6,24 +6,24 @@ import httpStatus from "http-status-codes"
 import { BlogService } from "./blog.service";
 
 const createBlog = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const user = await BlogService.createBlog(req.body);
+    const blog = await BlogService.createBlog(req.body);
     sendResponse(res, {
         statusCode: httpStatus.CREATED,
         success: true,
         message: "Blog Created Successfully",
-        data: user
+        data: blog
     })
 })
 
 const updateBlog = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const blogId = req.params.id;
     const payload = req.body;
-    const user = await BlogService.updateBlog(blogId, payload);
+    const blog = await BlogService.updateBlog(blogId, payload);
     sendResponse(res, {
         statusCode: httpStatus.CREATED,
         success: true,
         message: "Blog Updated Successfully",
-        data: user
+        data: blog
     })
 })
 
@@ -39,8 +39,8 @@ const getAllBlog = catchAsync(async (req: Request, res: Response, next: NextFunc
 })
 
 const getSingleBlog = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.params.id;
-    const result = await BlogService.getSingleBlog(userId);
+    const blogId = req.params.id;
+    const result = await BlogService.getSingleBlog(blogId);
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
@@ -49,9 +49,21 @@ const getSingleBlog = catchAsync(async (req: Request, res: Response, next: NextF
     })
 })
 
+const deleteBlog = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const blogId = req.params.id;
+    const result = await BlogService.deleteBlog(blogId);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Blog Deleted Successfully",
+        data: result.data,
+    })
+})
+
 export const BlogController = {
     createBlog,
     updateBlog,
     getAllBlog,
-    getSingleBlog
+    getSingleBlog,
+    deleteBlog
 }

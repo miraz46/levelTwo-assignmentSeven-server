@@ -8,25 +8,29 @@ const blogSchema = new Schema<IBlog>(
         title: {
             type: String,
             required: true,
+            trim: true,
         },
         content: {
             type: String,
             required: true,
+            trim: true,
         },
         excerpt: {
             type: String,
             required: true,
-            maxlength: 300, // optional: limit excerpt length
+            maxlength: 300,
+            trim: true,
         },
         slug: {
             type: String,
-            unique: true, // important for SEO-friendly URLs
+            unique: true,
             lowercase: true,
             trim: true,
         },
         coverImage: {
             type: String,
             default: "",
+            trim: true,
         },
         tags: {
             type: [String],
