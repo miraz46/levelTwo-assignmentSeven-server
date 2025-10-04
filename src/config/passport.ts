@@ -3,7 +3,6 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
 import { User } from "../modules/user/user.model";
-import { BlockedStatus } from "../modules/user/user.interface";
 
 passport.use(
     new LocalStrategy({
@@ -21,12 +20,6 @@ passport.use(
 
             if (!isPasswordMatched) {
                 return done(null, false, { message: "Password does not match" })
-            }
-            if (isUserExist.blockedStatus === BlockedStatus.BLOCKED) {
-                return done(null, false, { message: `User is ${isUserExist.blockedStatus}` })
-            }
-            if (isUserExist.driverInfo?.suspended === true) {
-                return done(null, false, { message: "Driver account is suspended." })
             }
 
             return done(null, isUserExist)
