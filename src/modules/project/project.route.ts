@@ -10,8 +10,8 @@ const router = Router();
 
 router.post("/create", validateRequest(createProjectZodSchema), checkAuth(Role.ADMIN), ProjectController.createProject)
 router.patch("/:id", validateRequest(updateProjectZodSchema), checkAuth(Role.ADMIN), ProjectController.updateProject);
-router.get("/all-projects", checkAuth(Role.ADMIN), ProjectController.getAllProject);
-router.get("/:id", checkAuth(Role.ADMIN), ProjectController.getSingleProject)
+router.get("/all-projects",  ProjectController.getAllProject);
+router.get("/:id",  ProjectController.getSingleProject)
 router.delete("/:id", checkAuth(Role.ADMIN), ProjectController.deleteProject)
 
 

@@ -9,8 +9,8 @@ const router = Router();
 
 router.post("/create", validateRequest(createBlogZodSchema), checkAuth(Role.ADMIN),BlogController.createBlog)
 router.patch("/:id", validateRequest(updateBlogZodSchema), checkAuth(Role.ADMIN), BlogController.updateBlog);
-router.get("/all-blogs", checkAuth(Role.ADMIN), BlogController.getAllBlog);
-router.get("/:id", checkAuth(Role.ADMIN), BlogController.getSingleBlog)
+router.get("/all-blogs",  BlogController.getAllBlog);
+router.get("/:id",  BlogController.getSingleBlog)
 router.delete("/:id", checkAuth(Role.ADMIN), BlogController.deleteBlog)
 
 export const BlogRoutes = router;
