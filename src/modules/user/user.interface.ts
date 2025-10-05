@@ -6,15 +6,15 @@ export enum Role {
 
 export interface IUser {
     _id?: Types.ObjectId;
-    name?: string;
+    name: string;
     email: string;
     password: string;
-    role?: Role;
+    role: Role;
     phone?: string;
-    title?: string;   
-    bio?: string;    
-    github?: string;
-    linkedin?: string;
-    skills?: string[];
+    title: string;   
+    bio: string;    
+    github: string;
+    linkedin: string;
+    skills: string[];
 }
 
