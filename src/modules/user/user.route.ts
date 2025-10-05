@@ -9,7 +9,7 @@ const router = Router();
 
 router.patch("/:id", validateRequest(updateUserZodSchema), checkAuth(...Object.values(Role)), UserController.updateUser);
 
-router.get("/me", checkAuth(...Object.values(Role)), UserController.getMe);
+router.get("/me",  UserController.getMe);
 
 
 
