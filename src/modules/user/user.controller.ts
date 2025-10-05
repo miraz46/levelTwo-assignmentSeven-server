@@ -5,6 +5,7 @@ import { UserServices } from "./user.service";
 import { sendResponse } from "../../utils/sendResponse";
 import { JwtPayload } from "jsonwebtoken";
 import { catchAsync } from "../../utils/catchAsync";
+import { envVars } from "../../config/env";
 
 const updateUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
@@ -20,8 +21,9 @@ const updateUser = catchAsync(async (req: Request, res: Response, next: NextFunc
 })
 
 const getMe = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const decodedToken = req.user as JwtPayload
-    const result = await UserServices.getMe(decodedToken.userId);
+
+    const personalEmail = envVars.SUPER_ADMIN_EMAIL;
+    const result = await UserServices.getMe(personalEmail);
 
     sendResponse(res, {
         success: true,

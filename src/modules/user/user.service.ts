@@ -27,8 +27,8 @@ const updateUser = async (userId: string, payload: Partial<IUser>, verifiedToken
 
 }
 
-const getMe = async (userId: string) => {
-    const user = await User.findById(userId).select("-password");
+const getMe = async (personalEmail: string) => {
+    const user = await User.findOne({ email: personalEmail }).select("-password");
     return {
         data: user
     }
