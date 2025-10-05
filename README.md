@@ -38,6 +38,7 @@ This is the backend API for my personal portfolio website. It is built with **No
 - **bcryptjs** (for password hashing)  
 - **Slugify** (for SEO-friendly URLs)  
 
+
 ---
 
 ## Getting Started
